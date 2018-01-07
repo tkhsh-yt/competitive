@@ -1,10 +1,13 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func main() {
-	var y, m, d int
+	var str string
 
-	fmt.Scanf("%d/%d/%d", &y, &m, &d)
-	fmt.Printf("%d/%02d/%02d", 2018, m, d)
+	fmt.Scanf("%s", &str)
+	fmt.Printf(strings.Replace(str, "2017", "2018", 1))
 }
