@@ -5,22 +5,22 @@ import (
 	"sort"
 )
 
-type Sord struct {
+type Sword struct {
 	a int64
 	b int64
 }
 
-type Sords []Sord
+type Swords []Sword
 
-func (a Sords) Len() int {
+func (a Swords) Len() int {
 	return len(a)
 }
 
-func (a Sords) Swap(i, j int) {
+func (a Swords) Swap(i, j int) {
 	a[i], a[j] = a[j], a[i]
 }
 
-func (a Sords) Less(i, j int) bool {
+func (a Swords) Less(i, j int) bool {
 	return a[i].b > a[j].b
 }
 
@@ -30,29 +30,29 @@ func main() {
 
 	fmt.Scanf("%d %d", &N, &H)
 
-	sords := make(Sords, N)
+	swords := make(Swords, N)
 
 	for i := 0; i < N; i++ {
-		fmt.Scanf("%d %d", &sords[i].a, &sords[i].b)
+		fmt.Scanf("%d %d", &swords[i].a, &swords[i].b)
 	}
 
-	sort.Sort(sords)
+	sort.Sort(swords)
 
-	max := sords[0].a
+	max := swords[0].a
 	for i := 0; i < N; i++ {
-		if sords[i].a > max {
-			max = sords[i].a
+		if swords[i].a > max {
+			max = swords[i].a
 		}
 	}
 
 	attack := 0
 	damage := int64(0)
 	for i := 0; i < N; i++ {
-		if damage >= H || sords[i].b < max {
+		if damage >= H || swords[i].b < max {
 			break
 		}
 
-		damage += sords[i].b
+		damage += swords[i].b
 		attack++
 	}
 
