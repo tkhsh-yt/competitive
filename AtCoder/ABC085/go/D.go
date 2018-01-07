@@ -21,7 +21,7 @@ func (a Sords) Swap(i, j int) {
 }
 
 func (a Sords) Less(i, j int) bool {
-	return a[i].a > a[j].a
+	return a[i].b > a[j].b
 }
 
 func main() {
@@ -38,26 +38,29 @@ func main() {
 
 	sort.Sort(sords)
 
-	atack := int(H / sords[0].a)
-	if H%sords[0].a != 0 {
-		atack++
-	}
-	damage := int64(atack) * sords[0].a
-
+	max := sords[0].a
 	for i := 0; i < N; i++ {
-		if sords[i].b > sords[0].a {
-			damage -= sords[0].a
-			damage += sords[i].b
-
-			sub := int((damage - H) / sords[0].a)
-			atack -= sub
-			damage -= sords[0].a * int64(sub)
+		if sords[i].a > max {
+			max = sords[i].a
 		}
 	}
 
-	if atack <= 0 {
-		fmt.Println(1)
-	} else {
-		fmt.Println(atack)
+	attack := 0
+	damage := int64(0)
+	for i := 0; i < N; i++ {
+		if damage >= H || sords[i].b < max {
+			break
+		}
+
+		damage += sords[i].b
+		attack++
 	}
+
+	if damage < H {
+		more := int((H - damage + (max - 1)) / max)
+		attack += more
+		damage += max * int64(more)
+	}
+
+	fmt.Println(attack)
 }
