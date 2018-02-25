@@ -17,11 +17,11 @@ func main() {
 	que := newQueue()
 	que.enqueue(&Point{0, 0, 0})
 
-	gone := make([][]bool, H)
+	visit := make([][]bool, H)
 	for i := 0; i < H; i++ {
-		gone[i] = make([]bool, W)
+		visit[i] = make([]bool, W)
 	}
-	gone[0][0] = true
+	visit[0][0] = true
 
 	dx := []int{-1, 0, 1, 0}
 	dy := []int{0, -1, 0, 1}
@@ -47,8 +47,8 @@ func main() {
 			y := p.y + dy[i]
 			x := p.x + dx[i]
 			if 0 <= x && x < W && 0 <= y && y < H {
-				if !gone[y][x] && ([]rune(S[y]))[x] == '.' {
-					gone[y][x] = true
+				if !visit[y][x] && ([]rune(S[y]))[x] == '.' {
+					visit[y][x] = true
 					que.enqueue(&Point{x, y, p.m + 1})
 				}
 			}
