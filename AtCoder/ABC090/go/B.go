@@ -1,16 +1,28 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
-var N int
-var M int
+var A int
+var B int
 
 func main() {
-	fmt.Scanf("%d %d", &N, &M)
+	fmt.Scanf("%d %d", &A, &B)
 
-	fmt.Println(N, M)
+	ans := 0
+	for i := A; i <= B; i++ {
+		s := []rune(strconv.Itoa(i))
+		for j := 0; j < len(s); j++ {
+			if s[j] != s[len(s)-j-1] {
+				break
+			}
+			if j == len(s)-1 {
+				ans++
+			}
+		}
+	}
 
-	flip := (N - 1) * (M - 1)
-
-	fmt.Println(flip)
+	fmt.Println(ans)
 }
